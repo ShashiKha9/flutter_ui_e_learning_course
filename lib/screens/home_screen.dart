@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_e_learning_course/constants/colors.dart';
-import 'package:flutter_ui_e_learning_course/data/courses.dart';
+import 'package:flutter_ui_e_learning_course/models/courses.dart';
 import 'package:flutter_ui_e_learning_course/widget/active_courses.dart';
 import 'package:flutter_ui_e_learning_course/widget/category_title.dart';
 import 'package:flutter_ui_e_learning_course/widget/course_item.dart';
@@ -8,7 +8,8 @@ import 'package:flutter_ui_e_learning_course/widget/emoji_text.dart';
 import 'package:flutter_ui_e_learning_course/widget/search_input.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key ,}) : super(key: key);
+  final Courses course;
+  HomeScreen(this.course);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +21,43 @@ class HomeScreen extends StatelessWidget {
             EmojiText(),
             SearchInput(),
             CategoryTitle(leftText: 'Top of the Week',rightText: 'view all',),
-            CourseItem(courseList: course,),
+            CourseItem( courseList: course,
+              course: Courses(title: course.title, imageUrl: course.imageUrl, author: author, authorImg: authorImg),),
             ActiveCourse(),
           ],
         ),
       ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
+  }
+
+  BottomNavigationBar _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(
+          label: "Home",
+            icon: Container(
+              padding: EdgeInsets.only(bottom: 7),
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(
+                  color: accent,width: 2.0
+                ))
+              ),
+              child: Text("Home",style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                letterSpacing: 1.2
+              ),),
+            )),
+        BottomNavigationBarItem(
+          label: "Calendar",
+            icon: Icon(Icons.calendar_today_outlined,color: fontLight)),
+        BottomNavigationBarItem(
+            label: "Bookmark",
+            icon: Icon(Icons.bookmark_border,color: fontLight)),
+        BottomNavigationBarItem(
+            label: "User",
+            icon: Icon(Icons.person,color: fontLight,)),
+      ],
     );
   }
   _buildAppBar(){

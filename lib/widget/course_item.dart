@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ui_e_learning_course/constants/colors.dart';
 import 'package:flutter_ui_e_learning_course/data/courses.dart';
 import 'package:flutter_ui_e_learning_course/models/courses.dart';
+import 'package:flutter_ui_e_learning_course/screens/course_detail_screen.dart';
 
 class CourseItem extends StatelessWidget {
   final  List<Courses> courseList;
-  const CourseItem({Key? key,required this.courseList}) : super(key: key);
+   final Courses course;
+  const CourseItem({Key? key, required this.courseList,required this.course}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child: Stack(
         children: [
@@ -102,7 +105,8 @@ class CourseItem extends StatelessWidget {
           ),
           ),
           Positioned(
-              top: 60,
+            bottom: 90,
+              right: 150,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     primary: accent,
@@ -112,7 +116,8 @@ class CourseItem extends StatelessWidget {
                     )
                 ),
 
-                onPressed: ()=> print("Start"),
+                onPressed: ()=> Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> CourseDetailScreen(course))),
                 child: Text("Start"),
               )),
 

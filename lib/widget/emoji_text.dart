@@ -7,11 +7,12 @@ class EmojiText extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
       return Container(
+        alignment: Alignment.topLeft,
         padding: EdgeInsets.only(left: 18.0),
         child: RichText(text: TextSpan(
           children: [
             TextSpan(
-              text: "Let's boost your\n brain power ",
+              text: "Let's boost your\nbrain power ",
               style: TextStyle(fontSize: 22.0,color: font,fontWeight: FontWeight.w600)
             ),
             TextSpan(text: "✨",
